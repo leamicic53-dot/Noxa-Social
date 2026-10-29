@@ -2,271 +2,1318 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#100b18">
-<title>Noxa — Ton monde, tes liens</title>
-<style>
-:root {
-  --bg:#100b18; --card:#1b1426; --card2:#261b35;
-  --line:#392747; --purple:#b58aff; --pink:#ff78c9;
-  --text:#fff7ff; --muted:#b6a6c4;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-header{position:sticky;top:0;z-index:5;display:flex;
-justify-content:space-between;align-items:center;padding:15px 20px;
-background:#100b18ee;border-bottom:1px solid var(--line);backdrop-filter:blur(15px)}
-.logo{font-size:30px;font-weight:900;letter-spacing:-2px}
-.logo span{color:var(--pink)}
-.tagline{font-size:11px;color:var(--muted)}
-.avatar{width:43px;height:43px;border-radius:50%;display:grid;
-place-items:center;background:linear-gradient(135deg,#9657ff,#ff78c9);
-color:white;font-weight:800;flex-shrink:0}
-.layout{max-width:1200px;margin:auto;padding:24px 16px;display:grid;
-grid-template-columns:190px minmax(0,620px) 220px;gap:22px}
-nav.side{position:sticky;top:90px;align-self:start}
-.navbtn{width:100%;padding:13px;border:0;border-radius:12px;
-background:transparent;color:var(--muted);text-align:left;margin-bottom:5px}
-.navbtn.active,.navbtn:hover{background:var(--card2);color:white}
-.primary{background:linear-gradient(110deg,#9257ff,#f05fc0);
-border:0;color:white;font-weight:800;padding:12px 17px;border-radius:12px}
-.primary:hover{filter:brightness(1.1)}
-.panel,.post,.sidecard{background:var(--card);border:1px solid var(--line);
-border-radius:17px;margin-bottom:15px}
-h1{font-size:23px;margin:0 0 18px}
-.stories{display:flex;gap:15px;padding:15px;overflow:auto}
-.story{min-width:65px;text-align:center;font-size:12px;color:var(--muted);
-cursor:pointer}
-.ring{width:58px;height:58px;padding:3px;margin:0 auto 7px;
-border-radius:50%;background:linear-gradient(135deg,#a46bff,#ff78c9)}
-.ring div{height:100%;border-radius:50%;display:grid;place-items:center;
-background:var(--card2);border:2px solid var(--card);font-size:21px}
-.composer{padding:15px}
-.composehead{display:flex;gap:12px}
-textarea,input{width:100%;padding:12px;border-radius:11px;
-border:1px solid var(--line);background:#130e1c;color:var(--text);outline:none}
-textarea{min-height:85px;resize:vertical}
-textarea:focus,input:focus{border-color:var(--pink)}
-.composefoot{display:flex;align-items:center;justify-content:space-between;
-gap:10px;margin-top:12px}
-.muted{color:var(--muted);font-size:12px;line-height:1.6}
-.post{padding:16px}
-.posthead{display:flex;align-items:center;gap:10px}
-.handle{color:var(--muted);font-size:12px;margin-top:3px}
-.posttext{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;
-margin:16px 0}
-.actions{display:flex;gap:6px;flex-wrap:wrap}
-.action{border:0;background:transparent;color:var(--muted);
-padding:8px;border-radius:8px}
-.action:hover,.action.liked{background:#382039;color:var(--pink)}
-.commentbox{margin-top:12px}
-.commentrow{display:flex;gap:8px;margin-top:10px}
-.commentrow input{min-width:0}
-.small{border:1px solid var(--line);background:var(--card2);
-color:var(--purple);border-radius:9px;padding:9px}
-.sidecard{padding:16px}
-.sidecard h3{font-size:15px;margin-top:0}
-.profile{text-align:center;padding:24px}
-.profile .avatar{width:75px;height:75px;font-size:24px;margin:0 auto 12px}
-.stats{display:flex;justify-content:space-around;margin:22px 0}
-.stats strong{display:block;font-size:19px}
-.stats span{font-size:11px;color:var(--muted)}
-.empty{text-align:center;padding:30px 15px;color:var(--muted)}
-.hidden{display:none!important}
-.mobile{display:none}
-footer{text-align:center;padding:18px;color:var(--muted);font-size:11px}
-@media(max-width:950px){
-.layout{grid-template-columns:155px minmax(0,620px)}
-.right{display:none}
-}
-@media(max-width:650px){
-.layout{display:block;padding:15px 11px 90px}
-.side{display:none}
-.mobile{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;
-justify-content:space-around;background:#160f20f5;border-top:1px solid var(--line);
-padding:8px 3px max(8px,env(safe-area-inset-bottom))}
-.mobile button{background:none;border:0;color:var(--muted);font-size:20px;padding:8px}
-.mobile button.active{color:var(--pink)}
-header{padding:12px 15px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0812">
+
+  <title>NOXA — Ton monde. Tes liens. Ton espace.</title>
+
+  <meta name="description"
+        content="Noxa est un projet de réseau social imaginé par Léa pour favoriser le partage, le respect et la lutte contre le cyberharcèlement.">
+
+  <style>
+    /* =========================
+       1. IDENTITÉ VISUELLE
+    ========================= */
+
+    :root {
+      --background: #0b0812;
+      --surface: #151020;
+      --surface-light: #20162f;
+      --purple: #9b5cff;
+      --pink: #ec69c7;
+      --text: #f8f4ff;
+      --muted: #b6abc8;
+      --border: rgba(255,255,255,0.10);
+      --radius: 22px;
+      --max-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse at 15% 0%, #28143d 0%, transparent 35%),
+        radial-gradient(ellipse at 100% 45%, #21102f 0%, transparent 30%),
+        var(--background);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body, button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button, a {
+      touch-action: manipulation;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--pink);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(var(--max-width), 90%);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: #d2aaff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #c39aff, #f28bd5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-description {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .section-heading {
+      margin-bottom: 48px;
+    }
+
+    /* =========================
+       2. BARRE DE NAVIGATION
+    ========================= */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 8, 18, 0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    .logo-symbol {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: white;
+      box-shadow: 0 0 25px rgba(155,92,255,0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: var(--surface);
+      color: white;
+      border: 1px solid var(--border);
+      padding: 8px 13px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       3. BOUTONS
+    ========================= */
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 22px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(110deg, #8b4cff, #d45ab8);
+      box-shadow: 0 8px 30px rgba(155,92,255,0.2);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 10px 35px rgba(155,92,255,0.38);
+    }
+
+    .button-secondary {
+      color: white;
+      border-color: var(--border);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* =========================
+       4. ACCUEIL
+    ========================= */
+
+    .hero {
+      min-height: 690px;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 90px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .hero h1 {
+      max-width: 750px;
+      font-size: clamp(3rem, 6.7vw, 5.8rem);
+      line-height: 1.02;
+      letter-spacing: -4px;
+      margin-bottom: 28px;
+    }
+
+    .hero-description {
+      color: var(--muted);
+      max-width: 600px;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-bottom: 32px;
+    }
+
+    .hero-note {
+      color: #b7a7cc;
+      font-size: 0.85rem;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 410px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orb {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: linear-gradient(140deg, #984fff, #e45db8);
+      filter: blur(1px);
+      opacity: 0.8;
+      box-shadow: 0 0 100px rgba(155,92,255,0.24);
+    }
+
+    .orbit {
+      position: absolute;
+      width: 390px;
+      height: 390px;
+      border: 1px solid rgba(214,175,255,0.24);
+      border-radius: 50%;
+      animation: rotate 22s linear infinite;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #f6a7e2;
+      border-radius: 50%;
+      box-shadow: 0 0 25px #e976d2;
+    }
+
+    .orbit::before {
+      top: 43px;
+      left: 45px;
+    }
+
+    .orbit::after {
+      right: 15px;
+      bottom: 115px;
+      width: 9px;
+      height: 9px;
+    }
+
+    .noxa-emblem {
+      position: relative;
+      z-index: 1;
+      font-size: 9rem;
+      font-weight: 900;
+      letter-spacing: -12px;
+      text-shadow: 0 8px 55px rgba(0,0,0,0.4);
+    }
+
+    .floating-card {
+      position: absolute;
+      z-index: 2;
+      padding: 15px 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 17px;
+      background: rgba(22,14,35,0.88);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+    }
+
+    .floating-card strong {
+      display: block;
+      color: #f4b4e6;
+      margin-bottom: 2px;
+    }
+
+    .floating-one {
+      top: 48px;
+      right: -5px;
+    }
+
+    .floating-two {
+      left: -5px;
+      bottom: 55px;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    /* =========================
+       5. BANDEAU DE VALEURS
+    ========================= */
+
+    .values-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.025);
+    }
+
+    .values-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 26px 0;
+    }
+
+    .value-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      color: #e7d7fa;
+      font-weight: 650;
+      text-align: center;
+    }
+
+    .value-icon {
+      font-size: 1.3rem;
+    }
+
+    /* =========================
+       6. HISTOIRE DE LÉA
+    ========================= */
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 65px;
+      align-items: start;
+    }
+
+    .story-card {
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at top left, rgba(155,92,255,0.18), transparent 60%),
+        var(--surface);
+    }
+
+    .story-avatar {
+      display: grid;
+      place-items: center;
+      width: 90px;
+      height: 90px;
+      border-radius: 27px;
+      margin-bottom: 23px;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #7e46df, #e66abe);
+    }
+
+    .story-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .story-card p {
+      color: var(--muted);
+    }
+
+    .story-content p {
+      color: var(--muted);
+      margin-bottom: 19px;
+    }
+
+    .story-content strong {
+      color: white;
+    }
+
+    .quote {
+      padding: 22px 24px;
+      margin-top: 25px;
+      border-left: 3px solid var(--pink);
+      border-radius: 0 15px 15px 0;
+      background: rgba(205,93,193,0.08);
+      color: #f0d9f7;
+      font-size: 1.08rem;
+      font-weight: 650;
+    }
+
+    /* =========================
+       7. FONCTIONNALITÉS
+    ========================= */
+
+    .features {
+      background: rgba(255,255,255,0.018);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(188,130,255,0.55);
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #48236f, #342040);
+      font-size: 1.5rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 9px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 18px;
+      color: #d8b7ff;
+      background: rgba(155,92,255,0.12);
+      border: 1px solid rgba(155,92,255,0.2);
+      padding: 5px 10px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 750;
+    }
+
+    /* =========================
+       8. SÉCURITÉ
+    ========================= */
+
+    .safety-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 60px);
+      border-radius: 30px;
+      border: 1px solid rgba(190,135,255,0.25);
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(213,91,191,0.16), transparent 40%),
+        linear-gradient(135deg, #1c122b, #110d1a);
+    }
+
+    .safety-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .safety-panel p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .safety-list {
+      list-style: none;
+      display: grid;
+      gap: 17px;
+    }
+
+    .safety-list li {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    .check {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 27px;
+      height: 27px;
+      border-radius: 9px;
+      background: rgba(174,117,255,0.18);
+      color: #d4b4ff;
+      font-weight: 900;
+    }
+
+    .safety-list strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .safety-list span:last-child {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .safety-note {
+      font-size: 0.85rem;
+      margin-top: 25px;
+      opacity: 0.9;
+    }
+
+    /* =========================
+       9. VALEURS
+    ========================= */
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    .value-card {
+      padding: 23px 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .value-card .value-icon {
+      display: block;
+      margin-bottom: 13px;
+      font-size: 1.8rem;
+    }
+
+    .value-card h3 {
+      font-size: 1rem;
+      margin-bottom: 7px;
+    }
+
+    .value-card p {
+      font-size: 0.87rem;
+      color: var(--muted);
+    }
+
+    /* =========================
+       10. APPEL À REJOINDRE
+    ========================= */
+
+    .join {
+      text-align: center;
+    }
+
+    .join-panel {
+      padding: 65px 25px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(155,92,255,0.23), transparent 65%),
+        var(--surface);
+    }
+
+    .join-panel .section-description {
+      margin: 0 auto 28px;
+    }
+
+    .join-label {
+      display: inline-block;
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* =========================
+       11. PIED DE PAGE
+    ========================= */
+
+    .footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer p,
+    .footer a {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================
+       12. ANIMATIONS
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* =========================
+       13. VERSION MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .story-grid,
+      .safety-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .hero-art {
+        min-height: 360px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .values-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .story-grid {
+        gap: 30px;
+      }
+
+      .floating-one {
+        right: 5%;
+      }
+
+      .floating-two {
+        left: 5%;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .navbar {
+        min-height: 68px;
+      }
+
+      .logo {
+        font-size: 1.35rem;
+      }
+
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        background: #100b19;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px 0;
+      }
+
+      .nav-links .button {
+        margin-top: 10px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 70px 0 45px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.8rem, 12vw, 4rem);
+        letter-spacing: -2px;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .hero-art {
+        min-height: 300px;
+        transform: scale(0.85);
+        margin: -15px 0;
+      }
+
+      .orb {
+        width: 240px;
+        height: 240px;
+      }
+
+      .orbit {
+        width: 300px;
+        height: 300px;
+      }
+
+      .noxa-emblem {
+        font-size: 7rem;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .values-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px 10px;
+      }
+
+      .feature-grid,
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-card {
+        padding: 25px;
+      }
+
+      .safety-panel {
+        padding: 28px 22px;
+      }
+
+      .footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div><div class="logo">noxa<span>.</span></div>
-  <div class="tagline">Ton monde. Tes liens.</div></div>
-  <button class="avatar" id="headAvatar" onclick="go('profile')">N</button>
-</header>
 
-<div class="layout">
-<nav class="side">
-  <button class="navbtn active" data-page="home" onclick="go('home')">⌂ Accueil</button>
-  <button class="navbtn" data-page="explore" onclick="go('explore')">⌕ Découvrir</button>
-  <button class="navbtn" data-page="stories" onclick="go('stories')">◉ Stories</button>
-  <button class="navbtn" data-page="messages" onclick="go('messages')">✉ Messages</button>
-  <button class="navbtn" data-page="profile" onclick="go('profile')">♙ Mon profil</button>
-  <button class="primary" style="width:100%;margin-top:12px" onclick="focusPost()">＋ Publier</button>
-  <p class="muted" style="padding:10px">NOXA © 2026<br>Ton espace, tes règles.</p>
-</nav>
+  <!-- NAVIGATION -->
+  <header class="header">
+    <div class="container navbar">
+      <a class="logo" href="#accueil" aria-label="Noxa, accueil">
+        <span class="logo-symbol">N</span>
+        <span>NOXA</span>
+      </a>
 
-<main>
-<section id="homePage">
-  <h1>Ton fil d'actualité</h1>
-  <div class="panel stories" id="storystrip"></div>
-  <div class="panel composer" id="composer">
-    <div class="composehead"><div class="avatar">N</div>
-    <textarea id="postinput" maxlength="500" placeholder="Quoi de neuf dans ton monde ?"></textarea></div>
-    <div class="composefoot"><span class="muted">✦ Partage tes idées</span>
-    <button class="primary" onclick="publish()">Publier</button></div>
-  </div>
-  <div id="feed"></div>
-</section>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="navLinks">
+        ☰ Menu
+      </button>
 
-<section id="explorePage" class="hidden">
-  <h1>Découvrir</h1>
-  <input id="search" placeholder="Rechercher une publication..." oninput="renderExplore()">
-  <div id="explorefeed"></div>
-</section>
+      <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a>
+        <a href="#histoire">Mon histoire</a>
+        <a href="#fonctionnalites">Le projet</a>
+        <a href="#securite">Sécurité</a>
+        <a href="#valeurs">Nos valeurs</a>
+        <a class="button button-primary" href="#rejoindre">Découvrir Noxa</a>
+      </nav>
+    </div>
+  </header>
 
-<section id="storiesPage" class="hidden">
-  <h1>Les stories</h1>
-  <div class="panel composer">
-    <p>Un instant de ta journée 💜</p>
-    <input id="storyinput" maxlength="160" placeholder="Écris ta story...">
-    <button class="primary" style="width:100%;margin-top:12px" onclick="addStory()">Ajouter à ma story</button>
-  </div>
-  <div id="allstories"></div>
-</section>
+  <main>
 
-<section id="messagesPage" class="hidden">
-  <h1>Messages</h1>
-  <div class="panel empty"><div style="font-size:32px">✉</div>
-  <h3>La messagerie arrive bientôt</h3>
-  <p>Nous connecterons les conversations entre utilisateurs dans une prochaine étape.</p></div>
-</section>
+    <!-- ACCUEIL -->
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">Un projet imaginé avec le cœur</span>
 
-<section id="profilePage" class="hidden">
-  <h1>Mon profil</h1>
-  <div class="panel profile">
-    <div class="avatar" id="profileAvatar">N</div>
-    <h2 id="profilename">Mon compte Noxa</h2>
-    <p class="muted">@moi</p><p>Bienvenue dans mon univers 💜</p>
-    <div class="stats"><div><strong id="postcount">0</strong><span>Publications</span></div>
-    <div><strong>0</strong><span>Abonnés</span></div>
-    <div><strong>0</strong><span>Abonnements</span></div></div>
-    <button class="small" onclick="editName()">Modifier mon nom</button>
-  </div>
-  <h3>Mes publications</h3><div id="myposts"></div>
-</section>
-</main>
+          <h1>
+            Ton monde.<br>
+            Tes liens.<br>
+            <span class="gradient-text">Ton espace.</span>
+          </h1>
 
-<aside class="right">
-  <div class="sidecard"><h3>Bienvenue sur Noxa 💜</h3>
-  <p class="muted">Un espace pour partager tes idées, découvrir de nouveaux univers et créer des liens.</p></div>
-  <div class="sidecard"><h3>Le projet</h3>
-  <p class="muted">Cette première version est un prototype. Les publications ne sont pas encore partagées entre les visiteurs.</p></div>
-</aside>
-</div>
+          <p class="hero-description">
+            Noxa est un projet de réseau social imaginé pour rassembler,
+            partager et créer des liens dans un environnement où le
+            respect et la sécurité ont toute leur place.
+          </p>
 
-<nav class="mobile">
-  <button data-page="home" class="active" onclick="go('home')">⌂</button>
-  <button data-page="explore" onclick="go('explore')">⌕</button>
-  <button data-page="stories" onclick="go('stories')">◉</button>
-  <button data-page="messages" onclick="go('messages')">✉</button>
-  <button data-page="profile" onclick="go('profile')">♙</button>
-</nav>
-<footer>Noxa · Première version · Noir, violet et rose</footer>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#histoire">
+              Découvrir mon histoire <span aria-hidden="true">↗</span>
+            </a>
 
-<script>
-const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
-let posts=get("noxa-posts",[
-{id:1,name:"Noxa",handle:"@noxa",text:"Bienvenue sur Noxa 💜✨\nTon nouvel espace pour partager tes idées et découvrir des univers.",likes:2,liked:false,comments:[]}
-]);
-let stories=get("noxa-stories",[{id:1,name:"Noxa",text:"Bienvenue dans ton univers 💜"}]);
-let myname=get("noxa-name","Mon compte Noxa");
+            <a class="button button-secondary" href="#fonctionnalites">
+              Explorer le projet
+            </a>
+          </div>
 
-function persist(){
- try{
- localStorage.setItem("noxa-posts",JSON.stringify(posts));
- localStorage.setItem("noxa-stories",JSON.stringify(stories));
- localStorage.setItem("noxa-name",JSON.stringify(myname));
- }catch{alert("Impossible d'enregistrer dans ce navigateur.");}
-}
-function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function go(page){
- document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
- document.getElementById(page+"Page").classList.remove("hidden");
- document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- if(page==="profile")renderProfile();
- if(page==="stories")renderStoriesPage();
- if(page==="explore")renderExplore();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function focusPost(){go("home");document.getElementById("postinput").focus()}
-function publish(){
- const el=document.getElementById("postinput"),text=el.value.trim();
- if(!text)return alert("Écris un message avant de publier.");
- posts.unshift({id:Date.now(),name:myname,handle:"@moi",text,likes:0,liked:false,comments:[]});
- el.value="";persist();renderFeed();
-}
-function like(id){
- posts=posts.map(p=>p.id===id?{...p,liked:!p.liked,likes:p.likes+(p.liked?-1:1)}:p);
- persist();renderFeed();renderExplore();renderProfile();
-}
-function comment(id){
- const el=document.getElementById("commentinput"+id),text=el.value.trim();
- if(!text)return;
- posts=posts.map(p=>p.id===id?{...p,comments:[...p.comments,text]}:p);
- persist();renderFeed();renderExplore();
-}
-function postHTML(p){
- return `<article class="post"><div class="posthead"><div class="avatar">${safe(p.name.slice(0,1).toUpperCase())}</div><div><b>${safe(p.name)}</b><div class="handle">${safe(p.handle)}</div></div></div>
- <div class="posttext">${safe(p.text)}</div>
- <div class="actions"><button class="action ${p.liked?"liked":""}" onclick="like(${p.id})">♡ ${p.likes}</button>
- <button class="action" onclick="document.getElementById('comments${p.id}').classList.toggle('hidden')">▢ ${p.comments.length} Commentaires</button></div>
- <div class="commentbox hidden" id="comments${p.id}"><div>${p.comments.map(c=>`<p class="muted">💬 ${safe(c)}</p>`).join("")||'<p class="muted">Aucun commentaire.</p>'}</div>
- <div class="commentrow"><input id="commentinput${p.id}" maxlength="200" placeholder="Écrire un commentaire"><button class="small" onclick="comment(${p.id})">Envoyer</button></div></div></article>`;
-}
-function renderFeed(){
- document.getElementById("feed").innerHTML=posts.length?posts.map(postHTML).join():'<div class="panel empty">Aucune publication.</div>';
-}
-function renderExplore(){
- const q=(document.getElementById("search")?.value||"").toLowerCase();
- const found=posts.filter(p=>(p.name+" "+p.text+" "+p.handle).toLowerCase().includes(q));
- document.getElementById("explorefeed").innerHTML=found.length?found.map(postHTML).join():'<div class="panel empty">Aucun résultat.</div>';
-}
-function addStory(){
- const el=document.getElementById("storyinput"),text=el.value.trim();
- if(!text)return alert("Écris ta story.");
- stories.unshift({id:Date.now(),name:myname,text});
- el.value="";persist();renderStoryStrip();renderStoriesPage();
-}
-function renderStoryStrip(){
- document.getElementById("storystrip").innerHTML=
- `<div class="story" onclick="go('stories')"><div class="ring"><div>＋</div></div>Ajouter</div>`+
- stories.slice(0,12).map(s=>`<div class="story" onclick="alert('${safe(s.name).replace(/'/g,"\\'")}: ${safe(s.text).replace(/'/g,"\\'")}')"><div class="ring"><div>✦</div></div>${safe(s.name)}</div>`).join("");
-}
-function renderStoriesPage(){
- document.getElementById("allstories").innerHTML=stories.map(s=>
- `<article class="post"><b>${safe(s.name)}</b><p class="posttext">${safe(s.text)}</p><span class="muted">Story de démonstration</span></article>`).join("");
-}
-function renderProfile(){
- document.getElementById("profilename").textContent=myname;
- document.getElementById("profileAvatar").textContent=myname.slice(0,1).toUpperCase();
- document.getElementById("headAvatar").textContent=myname.slice(0,1).toUpperCase();
- const mine=posts.filter(p=>p.handle==="@moi");
- document.getElementById("postcount").textContent=mine.length;
- document.getElementById("myposts").innerHTML=mine.length?mine.map(postHTML).join():'<div class="panel empty">Tes publications apparaîtront ici.</div>';
-}
-function editName(){
- const n=prompt("Quel nom veux-tu afficher ?",myname);
- if(n&&n.trim()){myname=n.trim().slice(0,40);persist();renderProfile()}
-}
-renderFeed();renderStoryStrip();renderStoriesPage();renderProfile();
-</script>
+          <p class="hero-note">
+            ✦ Une idée personnelle, une ambition collective.
+          </p>
+        </div>
+
+        <div class="hero-art reveal" aria-label="Emblème graphique de Noxa">
+          <div class="orb"></div>
+          <div class="orbit"></div>
+          <div class="noxa-emblem" aria-hidden="true">N.</div>
+
+          <div class="floating-card floating-one">
+            <strong>💜 Bienveillance</strong>
+            Un espace pour chacun
+          </div>
+
+          <div class="floating-card floating-two">
+            <strong>🛡️ Respect</strong>
+            La sécurité compte
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALEURS RAPIDES -->
+    <div class="values-strip">
+      <div class="container values-row">
+        <div class="value-item">
+          <span class="value-icon">💜</span> Bienveillance
+        </div>
+        <div class="value-item">
+          <span class="value-icon">🛡️</span> Sécurité
+        </div>
+        <div class="value-item">
+          <span class="value-icon">✨</span> Créativité
+        </div>
+        <div class="value-item">
+          <span class="value-icon">🤝</span> Solidarité
+        </div>
+      </div>
+    </div>
+
+    <!-- MON HISTOIRE -->
+    <section class="section" id="histoire">
+      <div class="container story-grid">
+
+        <aside class="story-card reveal">
+          <div class="story-avatar" aria-hidden="true">🖤</div>
+          <h3>Enchantée, moi c'est Léa.</h3>
+          <p>
+            J'ai 23 ans et je suis à l'origine du projet Noxa.
+            J'aime la créativité, l'univers numérique et l'idée
+            de donner vie à des projets qui ont du sens.
+          </p>
+        </aside>
+
+        <div class="story-content reveal">
+          <span class="eyebrow">Derrière le projet</span>
+          <h2 class="section-title">
+            Une expérience difficile.<br>
+            <span class="gradient-text">Une envie de faire mieux.</span>
+          </h2>
+
+          <p>
+            Si j'ai imaginé Noxa, ce n'est pas seulement pour créer
+            un réseau social de plus. C'est aussi parce que j'ai
+            moi-même été confrontée au <strong>cyberharcèlement</strong>.
+          </p>
+
+          <p>
+            J'ai pu comprendre à quel point les paroles blessantes,
+            les humiliations et les comportements malveillants en
+            ligne peuvent affecter une personne. Derrière chaque écran,
+            il y a un être humain, avec ses émotions, ses difficultés
+            et son histoire.
+          </p>
+
+          <p>
+            Internet devrait permettre de partager ses passions,
+            de s'exprimer et de rencontrer des personnes. Personne
+            ne devrait avoir peur d'être soi-même parce qu'il redoute
+            les insultes, le jugement ou le harcèlement.
+          </p>
+
+          <p>
+            J'ai donc voulu transformer cette expérience en une
+            motivation : imaginer un espace où le respect ne serait
+            pas un détail, mais une valeur essentielle.
+          </p>
+
+          <div class="quote">
+            « Personne ne devrait avoir à subir le harcèlement
+            pour avoir le droit d'exister sur Internet. »
+          </div>
+
+          <p style="margin-top: 22px;">
+            Noxa est encore un projet en construction. Je souhaite
+            le développer progressivement, apprendre à chaque étape
+            et mettre en place des outils de protection adaptés.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FONCTIONNALITÉS -->
+    <section class="section features" id="fonctionnalites">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">L'univers Noxa</span>
+          <h2 class="section-title">
+            Plusieurs façons de <span class="gradient-text">se connecter.</span>
+          </h2>
+          <p class="section-description">
+            L'objectif est de réunir plusieurs façons de partager et
+            d'échanger dans un même espace. Ces fonctionnalités font
+            partie de la vision du projet : elles ne sont pas encore
+            toutes disponibles sur ce site.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">👤</div>
+            <h3>Profils personnalisés</h3>
+            <p>
+              Créer son univers, choisir sa présentation et partager
+              ses centres d'intérêt.
+            </p>
+            <span class="status">Objectif du projet</span>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">📸</div>
+            <h3>Photos et vidéos</h3>
+            <p>
+              Publier des moments de vie, des créations et des
+              contenus qui nous ressemblent.
+            </p>
+            <span class="status">Objectif du projet</span>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">💬</div>
+            <h3>Publications et commentaires</h3>
+            <p>
+              Découvrir des idées, réagir aux publications et
+              échanger avec la communauté.
+            </p>
+            <span class="status">Objectif du projet</span>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">🌙</div>
+            <h3>Stories et moments</h3>
+            <p>
+              Partager des instants spontanés et découvrir
+              les moments des autres.
+            </p>
+            <span class="status">Objectif du projet</span>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">✉️</div>
+            <h3>Messagerie privée</h3>
+            <p>
+              Discuter en privé et créer des liens, avec des
+              paramètres de confidentialité adaptés.
+            </p>
+            <span class="status">Objectif du projet</span>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">🎧</div>
+            <h3>Appels audio et vidéo</h3>
+            <p>
+              À terme, pouvoir échanger en direct avec ses proches
+              et les personnes que l'on choisit.
+            </p>
+            <span class="status">Objectif à long terme</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SÉCURITÉ -->
+    <section class="section" id="securite">
+      <div class="container">
+        <div class="safety-panel reveal">
+          <div class="safety-grid">
+
+            <div>
+              <span class="eyebrow">Notre engagement</span>
+              <h2 class="section-title">
+                La sécurité ne doit pas être <span class="gradient-text">une option.</span>
+              </h2>
+
+              <p>
+                La lutte contre le cyberharcèlement fait partie
+                des raisons d'être de Noxa. Je veux que ce projet
+                accorde une place importante à la protection des
+                personnes et à la prévention des abus.
+              </p>
+
+              <p>
+                Cela demandera des règles claires, des outils
+                adaptés et une modération capable de traiter
+                les signalements.
+              </p>
+            </div>
+
+            <ul class="safety-list">
+              <li>
+                <span class="check">✓</span>
+                <span>
+                  <strong>Signalement</strong>
+                  <span>Permettre de signaler les contenus et comportements problématiques.</span>
+                </span>
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                <span>
+                  <strong>Blocage</strong>
+                  <span>Donner aux utilisateurs davantage de contrôle sur leurs interactions.</span>
+                </span>
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                <span>
+                  <strong>Règles communautaires</strong>
+                  <span>Définir clairement les comportements interdits et les conséquences possibles.</span>
+                </span>
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                <span>
+                  <strong>Modération</strong>
+                  <span>Prévoir un processus de traitement des signalements et des abus.</span>
+                </span>
+              </li>
+            </ul>
+
+          </div>
+
+          <p class="safety-note">
+            Ces protections sont des objectifs de conception.
+            Elles ne sont pas encore opérationnelles sur cette page
+            vitrine. Elles devront être développées et testées avant
+            l'ouverture d'une véritable communauté.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALEURS -->
+    <section class="section" id="valeurs">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">L'esprit Noxa</span>
+          <h2 class="section-title">
+            Un projet guidé par <span class="gradient-text">des valeurs.</span>
+          </h2>
+          <p class="section-description">
+            Ce sont les principes que je souhaite placer au cœur
+            de Noxa, dès ses premières étapes.
+          </p>
+        </div>
+
+        <div class="values-grid">
+
+          <article class="value-card reveal">
+            <span class="value-icon" aria-hidden="true">💜</span>
+            <h3>Bienveillance</h3>
+            <p>Se parler sans humilier ni rabaisser les autres.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-icon" aria-hidden="true">🛡️</span>
+            <h3>Respect</h3>
+            <p>Reconnaître la dignité et les limites de chacun.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-icon" aria-hidden="true">🎨</span>
+            <h3>Créativité</h3>
+            <p>Partager ses passions, ses idées et son univers.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-icon" aria-hidden="true">🌈</span>
+            <h3>Authenticité</h3>
+            <p>Pouvoir exprimer sa personnalité sans avoir à jouer un rôle.</p>
+          </article>
+
+          <article class="value-card reveal">
+            <span class="value-icon" aria-hidden="true">🤝</span>
+            <h3>Solidarité</h3>
+            <p>Prendre le cyberharcèlement au sérieux et ne pas banaliser la violence.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- REJOINDRE -->
+    <section class="section join" id="rejoindre">
+      <div class="container">
+        <div class="join-panel reveal">
+          <span class="eyebrow">L'aventure commence ici</span>
+
+          <h2 class="section-title">
+            Bienvenue dans l'univers <span class="gradient-text">Noxa.</span>
+          </h2>
+
+          <p class="section-description">
+            Noxa commence par une idée et la volonté de construire
+            quelque chose de positif. Le projet va évoluer étape
+            par étape, avec l'ambition de créer une communauté
+            où chacun puisse trouver sa place.
+          </p>
+
+          <a class="button button-primary" href="#accueil">
+            Revenir à l'accueil ↑
+          </a>
+
+          <div>
+            <span class="join-label">
+              Site de présentation — la plateforme sociale est en développement.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIED DE PAGE -->
+  <footer class="footer">
+    <div class="container footer-row">
+      <a class="logo" href="#accueil">
+        <span class="logo-symbol">N</span>
+        <span>NOXA</span>
+      </a>
+
+      <p>
+        © <span id="year"></span> Noxa — Un projet fondé par Léa.
+      </p>
+
+      <div class="footer-links">
+        <a href="#histoire">À propos</a>
+        <a href="#securite">Sécurité</a>
+        <a href="#valeurs">Nos valeurs</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Année automatique dans le pied de page
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Menu pour les téléphones et petites tablettes
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Fermer le menu" : "Ouvrir le menu"
+      );
+      menuToggle.textContent = isOpen ? "✕ Fermer" : "☰ Menu";
+    });
+
+    // Fermer le menu après avoir sélectionné une rubrique
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+        menuToggle.textContent = "☰ Menu";
+      });
+    });
+
+    // Apparition progressive des éléments au défilement
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12
+      });
+
+      revealElements.forEach(function (element) {
+        observer.observe(element);
+      });
+    } else {
+      revealElements.forEach(function (element) {
+        element.classList.add("visible");
+      });
+    }
+  </script>
+
 </body>
 </html>
