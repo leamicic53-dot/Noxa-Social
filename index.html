@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b18">
+<title>Noxa — Ton monde, tes liens</title>
+<style>
+:root {
+  --bg:#100b18; --card:#1b1426; --card2:#261b35;
+  --line:#392747; --purple:#b58aff; --pink:#ff78c9;
+  --text:#fff7ff; --muted:#b6a6c4;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:5;display:flex;
+justify-content:space-between;align-items:center;padding:15px 20px;
+background:#100b18ee;border-bottom:1px solid var(--line);backdrop-filter:blur(15px)}
+.logo{font-size:30px;font-weight:900;letter-spacing:-2px}
+.logo span{color:var(--pink)}
+.tagline{font-size:11px;color:var(--muted)}
+.avatar{width:43px;height:43px;border-radius:50%;display:grid;
+place-items:center;background:linear-gradient(135deg,#9657ff,#ff78c9);
+color:white;font-weight:800;flex-shrink:0}
+.layout{max-width:1200px;margin:auto;padding:24px 16px;display:grid;
+grid-template-columns:190px minmax(0,620px) 220px;gap:22px}
+nav.side{position:sticky;top:90px;align-self:start}
+.navbtn{width:100%;padding:13px;border:0;border-radius:12px;
+background:transparent;color:var(--muted);text-align:left;margin-bottom:5px}
+.navbtn.active,.navbtn:hover{background:var(--card2);color:white}
+.primary{background:linear-gradient(110deg,#9257ff,#f05fc0);
+border:0;color:white;font-weight:800;padding:12px 17px;border-radius:12px}
+.primary:hover{filter:brightness(1.1)}
+.panel,.post,.sidecard{background:var(--card);border:1px solid var(--line);
+border-radius:17px;margin-bottom:15px}
+h1{font-size:23px;margin:0 0 18px}
+.stories{display:flex;gap:15px;padding:15px;overflow:auto}
+.story{min-width:65px;text-align:center;font-size:12px;color:var(--muted);
+cursor:pointer}
+.ring{width:58px;height:58px;padding:3px;margin:0 auto 7px;
+border-radius:50%;background:linear-gradient(135deg,#a46bff,#ff78c9)}
+.ring div{height:100%;border-radius:50%;display:grid;place-items:center;
+background:var(--card2);border:2px solid var(--card);font-size:21px}
+.composer{padding:15px}
+.composehead{display:flex;gap:12px}
+textarea,input{width:100%;padding:12px;border-radius:11px;
+border:1px solid var(--line);background:#130e1c;color:var(--text);outline:none}
+textarea{min-height:85px;resize:vertical}
+textarea:focus,input:focus{border-color:var(--pink)}
+.composefoot{display:flex;align-items:center;justify-content:space-between;
+gap:10px;margin-top:12px}
+.muted{color:var(--muted);font-size:12px;line-height:1.6}
+.post{padding:16px}
+.posthead{display:flex;align-items:center;gap:10px}
+.handle{color:var(--muted);font-size:12px;margin-top:3px}
+.posttext{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;
+margin:16px 0}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.action{border:0;background:transparent;color:var(--muted);
+padding:8px;border-radius:8px}
+.action:hover,.action.liked{background:#382039;color:var(--pink)}
+.commentbox{margin-top:12px}
+.commentrow{display:flex;gap:8px;margin-top:10px}
+.commentrow input{min-width:0}
+.small{border:1px solid var(--line);background:var(--card2);
+color:var(--purple);border-radius:9px;padding:9px}
+.sidecard{padding:16px}
+.sidecard h3{font-size:15px;margin-top:0}
+.profile{text-align:center;padding:24px}
+.profile .avatar{width:75px;height:75px;font-size:24px;margin:0 auto 12px}
+.stats{display:flex;justify-content:space-around;margin:22px 0}
+.stats strong{display:block;font-size:19px}
+.stats span{font-size:11px;color:var(--muted)}
+.empty{text-align:center;padding:30px 15px;color:var(--muted)}
+.hidden{display:none!important}
+.mobile{display:none}
+footer{text-align:center;padding:18px;color:var(--muted);font-size:11px}
+@media(max-width:950px){
+.layout{grid-template-columns:155px minmax(0,620px)}
+.right{display:none}
+}
+@media(max-width:650px){
+.layout{display:block;padding:15px 11px 90px}
+.side{display:none}
+.mobile{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;
+justify-content:space-around;background:#160f20f5;border-top:1px solid var(--line);
+padding:8px 3px max(8px,env(safe-area-inset-bottom))}
+.mobile button{background:none;border:0;color:var(--muted);font-size:20px;padding:8px}
+.mobile button.active{color:var(--pink)}
+header{padding:12px 15px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="logo">noxa<span>.</span></div>
+  <div class="tagline">Ton monde. Tes liens.</div></div>
+  <button class="avatar" id="headAvatar" onclick="go('profile')">N</button>
+</header>
+
+<div class="layout">
+<nav class="side">
+  <button class="navbtn active" data-page="home" onclick="go('home')">⌂ Accueil</button>
+  <button class="navbtn" data-page="explore" onclick="go('explore')">⌕ Découvrir</button>
+  <button class="navbtn" data-page="stories" onclick="go('stories')">◉ Stories</button>
+  <button class="navbtn" data-page="messages" onclick="go('messages')">✉ Messages</button>
+  <button class="navbtn" data-page="profile" onclick="go('profile')">♙ Mon profil</button>
+  <button class="primary" style="width:100%;margin-top:12px" onclick="focusPost()">＋ Publier</button>
+  <p class="muted" style="padding:10px">NOXA © 2026<br>Ton espace, tes règles.</p>
+</nav>
+
+<main>
+<section id="homePage">
+  <h1>Ton fil d'actualité</h1>
+  <div class="panel stories" id="storystrip"></div>
+  <div class="panel composer" id="composer">
+    <div class="composehead"><div class="avatar">N</div>
+    <textarea id="postinput" maxlength="500" placeholder="Quoi de neuf dans ton monde ?"></textarea></div>
+    <div class="composefoot"><span class="muted">✦ Partage tes idées</span>
+    <button class="primary" onclick="publish()">Publier</button></div>
+  </div>
+  <div id="feed"></div>
+</section>
+
+<section id="explorePage" class="hidden">
+  <h1>Découvrir</h1>
+  <input id="search" placeholder="Rechercher une publication..." oninput="renderExplore()">
+  <div id="explorefeed"></div>
+</section>
+
+<section id="storiesPage" class="hidden">
+  <h1>Les stories</h1>
+  <div class="panel composer">
+    <p>Un instant de ta journée 💜</p>
+    <input id="storyinput" maxlength="160" placeholder="Écris ta story...">
+    <button class="primary" style="width:100%;margin-top:12px" onclick="addStory()">Ajouter à ma story</button>
+  </div>
+  <div id="allstories"></div>
+</section>
+
+<section id="messagesPage" class="hidden">
+  <h1>Messages</h1>
+  <div class="panel empty"><div style="font-size:32px">✉</div>
+  <h3>La messagerie arrive bientôt</h3>
+  <p>Nous connecterons les conversations entre utilisateurs dans une prochaine étape.</p></div>
+</section>
+
+<section id="profilePage" class="hidden">
+  <h1>Mon profil</h1>
+  <div class="panel profile">
+    <div class="avatar" id="profileAvatar">N</div>
+    <h2 id="profilename">Mon compte Noxa</h2>
+    <p class="muted">@moi</p><p>Bienvenue dans mon univers 💜</p>
+    <div class="stats"><div><strong id="postcount">0</strong><span>Publications</span></div>
+    <div><strong>0</strong><span>Abonnés</span></div>
+    <div><strong>0</strong><span>Abonnements</span></div></div>
+    <button class="small" onclick="editName()">Modifier mon nom</button>
+  </div>
+  <h3>Mes publications</h3><div id="myposts"></div>
+</section>
+</main>
+
+<aside class="right">
+  <div class="sidecard"><h3>Bienvenue sur Noxa 💜</h3>
+  <p class="muted">Un espace pour partager tes idées, découvrir de nouveaux univers et créer des liens.</p></div>
+  <div class="sidecard"><h3>Le projet</h3>
+  <p class="muted">Cette première version est un prototype. Les publications ne sont pas encore partagées entre les visiteurs.</p></div>
+</aside>
+</div>
+
+<nav class="mobile">
+  <button data-page="home" class="active" onclick="go('home')">⌂</button>
+  <button data-page="explore" onclick="go('explore')">⌕</button>
+  <button data-page="stories" onclick="go('stories')">◉</button>
+  <button data-page="messages" onclick="go('messages')">✉</button>
+  <button data-page="profile" onclick="go('profile')">♙</button>
+</nav>
+<footer>Noxa · Première version · Noir, violet et rose</footer>
+
+<script>
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+let posts=get("noxa-posts",[
+{id:1,name:"Noxa",handle:"@noxa",text:"Bienvenue sur Noxa 💜✨\nTon nouvel espace pour partager tes idées et découvrir des univers.",likes:2,liked:false,comments:[]}
+]);
+let stories=get("noxa-stories",[{id:1,name:"Noxa",text:"Bienvenue dans ton univers 💜"}]);
+let myname=get("noxa-name","Mon compte Noxa");
+
+function persist(){
+ try{
+ localStorage.setItem("noxa-posts",JSON.stringify(posts));
+ localStorage.setItem("noxa-stories",JSON.stringify(stories));
+ localStorage.setItem("noxa-name",JSON.stringify(myname));
+ }catch{alert("Impossible d'enregistrer dans ce navigateur.");}
+}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function go(page){
+ document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
+ document.getElementById(page+"Page").classList.remove("hidden");
+ document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ if(page==="profile")renderProfile();
+ if(page==="stories")renderStoriesPage();
+ if(page==="explore")renderExplore();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function focusPost(){go("home");document.getElementById("postinput").focus()}
+function publish(){
+ const el=document.getElementById("postinput"),text=el.value.trim();
+ if(!text)return alert("Écris un message avant de publier.");
+ posts.unshift({id:Date.now(),name:myname,handle:"@moi",text,likes:0,liked:false,comments:[]});
+ el.value="";persist();renderFeed();
+}
+function like(id){
+ posts=posts.map(p=>p.id===id?{...p,liked:!p.liked,likes:p.likes+(p.liked?-1:1)}:p);
+ persist();renderFeed();renderExplore();renderProfile();
+}
+function comment(id){
+ const el=document.getElementById("commentinput"+id),text=el.value.trim();
+ if(!text)return;
+ posts=posts.map(p=>p.id===id?{...p,comments:[...p.comments,text]}:p);
+ persist();renderFeed();renderExplore();
+}
+function postHTML(p){
+ return `<article class="post"><div class="posthead"><div class="avatar">${safe(p.name.slice(0,1).toUpperCase())}</div><div><b>${safe(p.name)}</b><div class="handle">${safe(p.handle)}</div></div></div>
+ <div class="posttext">${safe(p.text)}</div>
+ <div class="actions"><button class="action ${p.liked?"liked":""}" onclick="like(${p.id})">♡ ${p.likes}</button>
+ <button class="action" onclick="document.getElementById('comments${p.id}').classList.toggle('hidden')">▢ ${p.comments.length} Commentaires</button></div>
+ <div class="commentbox hidden" id="comments${p.id}"><div>${p.comments.map(c=>`<p class="muted">💬 ${safe(c)}</p>`).join("")||'<p class="muted">Aucun commentaire.</p>'}</div>
+ <div class="commentrow"><input id="commentinput${p.id}" maxlength="200" placeholder="Écrire un commentaire"><button class="small" onclick="comment(${p.id})">Envoyer</button></div></div></article>`;
+}
+function renderFeed(){
+ document.getElementById("feed").innerHTML=posts.length?posts.map(postHTML).join():'<div class="panel empty">Aucune publication.</div>';
+}
+function renderExplore(){
+ const q=(document.getElementById("search")?.value||"").toLowerCase();
+ const found=posts.filter(p=>(p.name+" "+p.text+" "+p.handle).toLowerCase().includes(q));
+ document.getElementById("explorefeed").innerHTML=found.length?found.map(postHTML).join():'<div class="panel empty">Aucun résultat.</div>';
+}
+function addStory(){
+ const el=document.getElementById("storyinput"),text=el.value.trim();
+ if(!text)return alert("Écris ta story.");
+ stories.unshift({id:Date.now(),name:myname,text});
+ el.value="";persist();renderStoryStrip();renderStoriesPage();
+}
+function renderStoryStrip(){
+ document.getElementById("storystrip").innerHTML=
+ `<div class="story" onclick="go('stories')"><div class="ring"><div>＋</div></div>Ajouter</div>`+
+ stories.slice(0,12).map(s=>`<div class="story" onclick="alert('${safe(s.name).replace(/'/g,"\\'")}: ${safe(s.text).replace(/'/g,"\\'")}')"><div class="ring"><div>✦</div></div>${safe(s.name)}</div>`).join("");
+}
+function renderStoriesPage(){
+ document.getElementById("allstories").innerHTML=stories.map(s=>
+ `<article class="post"><b>${safe(s.name)}</b><p class="posttext">${safe(s.text)}</p><span class="muted">Story de démonstration</span></article>`).join("");
+}
+function renderProfile(){
+ document.getElementById("profilename").textContent=myname;
+ document.getElementById("profileAvatar").textContent=myname.slice(0,1).toUpperCase();
+ document.getElementById("headAvatar").textContent=myname.slice(0,1).toUpperCase();
+ const mine=posts.filter(p=>p.handle==="@moi");
+ document.getElementById("postcount").textContent=mine.length;
+ document.getElementById("myposts").innerHTML=mine.length?mine.map(postHTML).join():'<div class="panel empty">Tes publications apparaîtront ici.</div>';
+}
+function editName(){
+ const n=prompt("Quel nom veux-tu afficher ?",myname);
+ if(n&&n.trim()){myname=n.trim().slice(0,40);persist();renderProfile()}
+}
+renderFeed();renderStoryStrip();renderStoriesPage();renderProfile();
+</script>
+</body>
+</html>
